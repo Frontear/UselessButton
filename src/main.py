@@ -1,16 +1,18 @@
+import button
 import pygame
-import texture
 
 from pygame.locals import *
 
-
-def tick(screen: pygame.Surface, *textures: texture.Texture) -> bool:
+def tick(screen: pygame.Surface, button: button.Button) -> bool:
     for event in pygame.event.get():
         if event.type == QUIT:
             return False
+        elif event.type == MOUSEBUTTONDOWN or event.type == MOUSEBUTTONUP:
+            if event.button == 1:
+                button.update(event.type == MOUSEBUTTONDOWN)
 
     screen.fill((255, 255, 255))
-    textures[0].draw(screen)
+    button.draw(screen)
 
     return True
 
@@ -21,13 +23,9 @@ def main() -> None:
     SCREEN = pygame.display.set_mode((640, 360))
     CLOCK = pygame.time.Clock()
 
-    RELEASED = texture.Texture("released.png")
-    PRESSED = texture.Texture("pressed.png")
+    BUTTON = button.Button()
 
-    print(RELEASED.image.get_rect())
-    print(PRESSED.image.get_rect())
-
-    while tick(SCREEN, RELEASED, PRESSED):
+    while tick(SCREEN, BUTTON):
         pygame.display.update()
         CLOCK.tick(60)
 
