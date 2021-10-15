@@ -3,16 +3,19 @@ import pygame
 
 from pygame.locals import *
 
+mouse_down = False
 def tick(screen: pygame.Surface, button: button.Button) -> bool:
+    global mouse_down
+
     for event in pygame.event.get():
         if event.type == QUIT:
             return False
         elif event.type == MOUSEBUTTONDOWN or event.type == MOUSEBUTTONUP:
             if event.button == 1:
-                button.update(event.type == MOUSEBUTTONDOWN)
+                mouse_down = event.type == MOUSEBUTTONDOWN
 
     screen.fill((255, 255, 255))
-    button.draw(screen)
+    button.draw(screen, mouse_down)
 
     return True
 
