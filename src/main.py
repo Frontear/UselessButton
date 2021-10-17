@@ -1,9 +1,12 @@
 import button
 import pygame
+import pathlib
 
 from pygame.locals import *
 
 mouse_down = False
+
+
 def tick(screen: pygame.Surface, button: button.Button) -> bool:
     global mouse_down
 
@@ -14,6 +17,12 @@ def tick(screen: pygame.Surface, button: button.Button) -> bool:
             if event.button == 1:
                 mouse_down = event.type == MOUSEBUTTONDOWN
 
+                if mouse_down:
+                    if pygame.mixer.music.get_busy():
+                        pygame.mixer.music.stop()
+
+                    pygame.mixer.music.play()
+
     screen.fill((255, 255, 255))
     button.draw(screen, mouse_down)
 
@@ -23,9 +32,12 @@ def tick(screen: pygame.Surface, button: button.Button) -> bool:
 def main() -> None:
     pygame.init()
 
+    pygame.mixer.music.load(pathlib.Path(
+        pathlib.Path(__file__).parent, "assets", "thud.mp3"))
+    pygame.mixer.music.set_volume(0.2)
+
     SCREEN = pygame.display.set_mode((640, 360))
     CLOCK = pygame.time.Clock()
-
     BUTTON = button.Button()
 
     while tick(SCREEN, BUTTON):
