@@ -5,10 +5,12 @@ import pathlib
 from pygame.locals import *
 
 mouse_down = False
+count = 0
 
 
 def tick(screen: pygame.Surface, button: button.Button) -> bool:
     global mouse_down
+    global count
 
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -23,8 +25,10 @@ def tick(screen: pygame.Surface, button: button.Button) -> bool:
 
                     pygame.mixer.music.play()
 
+                    count += 1
+
     screen.fill((255, 255, 255))
-    button.draw(screen, mouse_down)
+    button.draw(screen, mouse_down, count)
 
     return True
 
