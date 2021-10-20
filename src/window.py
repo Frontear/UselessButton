@@ -2,6 +2,7 @@ import pygame
 import logging
 
 from pygame.constants import QUIT
+from renderable import Renderable
 
 class Window:
     _pygame_init = False
@@ -12,7 +13,9 @@ class Window:
 
             if fails > 0:
                 logger.warning(f"some pygame modules failed to initialize ({fails} failed)..")
-            
+
+            self.renderables = []
+
             Window._pygame_init = True
 
     def create_display(self, title: str, width: int, height: int, frames: int = 30) -> None:
@@ -23,6 +26,9 @@ class Window:
         self.surface.fill((200, 200, 200))
         pygame.display.set_caption(title)
 
+    def add_renderable(self, object: Renderable):
+        self.renderables.append(object)
+
     def run(self) -> None:
         exit = False
         while not exit:
@@ -31,7 +37,12 @@ class Window:
             for e in pygame.event.get():
                 if e.type == QUIT:
                     exit = True
-            
+                for x in self.renderables:
+                    x.on_event(e)
+
+            for x in self.renderables:
+                x.render(self.surface)
+
             pygame.display.update()
 
     def close(self):
