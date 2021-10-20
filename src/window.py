@@ -23,7 +23,6 @@ class Window:
         self.ticker = pygame.time.Clock()
         self.fps = frames
 
-        self.surface.fill((200, 200, 200))
         pygame.display.set_caption(title)
 
     def add_renderable(self, object: Renderable):
@@ -37,8 +36,11 @@ class Window:
             for e in pygame.event.get():
                 if e.type == QUIT:
                     exit = True
+
                 for x in self.renderables:
                     x.on_event(e)
+
+            self.surface.fill((200, 200, 200))
 
             for x in self.renderables:
                 x.render(self.surface)

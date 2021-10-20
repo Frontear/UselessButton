@@ -24,7 +24,7 @@ class Button(Renderable):
     def on_event(self, event: pygame.event.Event):
         if event.type == MOUSEBUTTONDOWN or event.type == MOUSEBUTTONUP:
             if event.button == 1:
-                self.state == event.type == MOUSEBUTTONDOWN
+                self.state = event.type == MOUSEBUTTONDOWN
                 if self.state:
                     if pygame.mixer.music.get_busy():
                         pygame.mixer.music.stop()
