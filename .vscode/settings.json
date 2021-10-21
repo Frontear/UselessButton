@@ -1,6 +1,9 @@
 {
     "cSpell.words": [
         "blit",
+        "centerx",
+        "centery",
+        "datefmt",
         "MOUSEBUTTONUP",
         "pygame"
     ]
