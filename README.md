@@ -5,7 +5,7 @@ An initial python project where the objective is to continuously press a red but
 We encourage using a Python [virtual environment](https://code.visualstudio.com/docs/python/environments), and using [VSCode](https://code.visualstudio.com/) for editing and maintaining this project.
 
 - Clone this repository via `git clone https://github.com/Frontear/UselessButton.git UselessButton`
-- Create a virtual environment in the repo via `cd Infinity && python -m venv .venv`
+- Create a virtual environment in the repo via `cd UselessButton && python -m venv .venv`
 - Open the workspace folder **UselessButton** in VS Code. It should automatically setup the virtual environment
 - Execute `python -m pip install -r requirements.txt` to install the necessary dependencies
 
